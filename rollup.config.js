@@ -1,17 +1,11 @@
-import json from '@rollup/plugin-json';
-import { terser } from 'rollup-plugin-terser';
+import resolve from '@rollup/plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
+
 export default {
   input: 'src/main.js',
-  output: [
-    {
-      dir: 'dist',
-      format: 'es',
-    },
-    {
-      dir: 'dist/optimize',
-      name: 'version',
-      plugins: [terser()],
-    }
-  ],
-  plugins: [json()]
+  output: {
+    file: 'bundle.js',
+    format: 'cjs'
+  },
+  plugins: [resolve(), babel({ babelHelpers: 'bundled' })]
 };
